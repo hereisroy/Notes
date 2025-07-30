@@ -1,0 +1,63 @@
+Methods for creating streams ->
+static <T> Stream<T>	empty()
+static <T> Stream<T>	generate(Supplier<? extends T> s)
+static <T> Stream<T>	iterate(T seed, Predicate<? super T> hasNext, UnaryOperator<T> next)
+static <T> Stream<T>	iterate(T seed, UnaryOperator<T> f)
+static <T> Stream<T>	of(T t)
+static <T> Stream<T>	of(T... values)
+static <T> Stream<T>	ofNullable(T t)
+static <T> Stream<T>	concat(Stream<? extends T> a, Stream<? extends T> b)
+
+Methods for filtering elements ->
+Stream<T>			filter(Predicate<? super T> predicate)
+Stream<T>			distinct()
+Stream<T>			limit(long maxSize)
+Stream<T>			skip(long n)
+default Stream<T>	dropWhile(Predicate<? super T> predicate)
+default Stream<T>	takeWhile(Predicate<? super T> predicate)
+
+Boolean Methods ->
+boolean	allMatch(Predicate<? super T> predicate)
+boolean	anyMatch(Predicate<? super T> predicate)
+boolean	noneMatch(Predicate<? super T> predicate)
+
+Sorting Methods -> 
+Stream<T>	sorted()
+Stream<T>	sorted(Comparator<? super T> comparator)
+
+Methods for getting element(s)->
+Optional<T>	findFirst()
+Optional<T>	findAny()
+
+Map Methods ->
+Stream<R>		map(Function<T,R> mapper)
+IntStream		mapToInt(ToIntFunction<T> mapper)
+LongStream		mapToLong(ToLongFunction<T> mapper)
+DoubleStream	mapToDouble(ToDoubleFunction<T> mapper)
+Stream<R>		flatMap(Function<T,Stream<R>> mapper)
+IntStream		flatMapToInt(Function<T,IntStream> mapper)
+LongStream		flatMapToLong(Function<T,LongStream> mapper)
+DoubleStream	flatMapToDouble(Function<T,DoubleStream> mapper)
+
+Reduction Methods ->
+Optional<T>		reduce(BinaryOperator<T> accumulator)
+T				reduce(T identity, BinaryOperator<T> accumulator)
+U				reduce(U identity, BiFunction<U,T,U> accumulator, BinaryOperator<U> combiner)
+R				collect(Supplier<R> supplier, BiConsumer<R,T> accumulator, BiConsumer<R,R> combiner)
+R				collect(Collector<T,A,R> collector)
+long			count()
+Optional<T>		min(Comparator<? super T> comparator)
+Optional<T>		max(Comparator<? super T> comparator)
+
+toArray Methods ->
+Object[]	toArray()
+A[]			toArray(IntFunction<A[]> generator)
+
+Inspection method ->
+Stream<T>	peek(Consumer<? super T> action)
+
+
+
+
+
+

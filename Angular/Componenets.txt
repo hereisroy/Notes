@@ -1,0 +1,6 @@
+-------- Nesting Components -----------
+
+To nest a component inside another we have to follow below steps :-
+
+	Add the child component class in parent component's "imports" array property inside component.ts file
+	Use the child component selector as a HTML tag inside parent component's component.html file

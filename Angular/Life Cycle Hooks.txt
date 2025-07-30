@@ -1,0 +1,19 @@
+Angular provides several lifecycle hooks that allow you to tap into key moments in the lifecycle of a component or directive. These hooks give you control over what happens at different stages of the component’s lifecycle, such as initialization, change detection, destruction, etc.
+
+For different life cycle hooks we need to implement different interfaces in our component class and define different methods which will be called at life cycle events. Below are few such interfaces. If a lifecycle hook interface's name is X, the method we have to override would be called ngX. For example, OnChanges is an interface & ngOnChanges is the method.
+
+OnChanges : This method is called when Angular detects changes in the values of input properties (properties that are bound with @Input()), allowing the component to react to those changes. This is the first life cycle hook that gets called.
+
+OnInit : Called once, after the first ngOnChanges() hook. It is called when Angular finishes initializing the component’s input properties. Ideal for initializing data in the component, setting up data-fetching operations, or any other initialization logic.
+
+DoCheck : Called during every change detection run, after ngOnChanges() and ngOnInit(). It allows custom change detection logic that Angular wouldn’t otherwise detect. Useful if you want to implement custom change detection logic that goes beyond Angular’s default behavior, such as tracking changes in deep object properties or arrays.
+
+AfterContentInit : This lifecycle hook is called once, after Angular has fully initialized all the content projected into the component. It’s useful for initializing any logic that depends on the projected content being available.
+
+AfterContentChecked : This hook is called after every change detection cycle for the component's projected content. This includes after the initial content check and any subsequent changes. It’s used when you need to respond to changes in the projected content dynamically.
+
+AfterViewInit : Called once after Angular initializes the component’s view and its child views. It's commonly used to access child components, directives, or DOM elements using @ViewChild or @ViewChildren.
+
+AfterViewChecked : Triggered after each change detection cycle is run for the component's view and any of its child views. It's often used to react to changes in the view or perform tasks that need to happen after the view has been checked for changes.
+
+OnDestroy : Called just before Angular destroys the component or directive. This happens when a component is removed from the view or when a directive is detached. It is the best place to clean up resources that were initialized during the component's lifecycle.

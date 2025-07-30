@@ -1,0 +1,7 @@
+component.ts : This file contains the TypeScript class that defines the component's logic and behavior. We use the @Component decorator from @angular/core on a class. This file alone creates a simple Angular Component. We pass an object as the argument to the @Component decorator. Here we can configure our component using the properties of the passing object.
+
+component.html : This file defines the HTML template for the component's user interface. The path to this file must be mentioned as the value of the "templateUrl" property in the component.ts file.
+
+component.css : This file contains the CSS styles specific to the component. The path to this file must be mentioned as the value of the "styleUrl" property in the component.ts file.
+
+component.spec.ts : This file contains unit tests for the component, ensuring its functionality works as expected.

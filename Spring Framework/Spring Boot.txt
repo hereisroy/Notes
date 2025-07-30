@@ -1,0 +1,65 @@
+Spring Boot is a open-sourced java based framework that simplifies the bootstrapping of stand-alone, production-grade Spring based Applications
+
+To create a spring boot application we add @SpringBootApplication in our main class and use the below code in the main method
+-> SpringApplication.run(Application.class, args)
+
+SpringApplication.run Method : The SpringApplication.run() method is the entry point for starting up a Spring Boot application. It loads External Configurations from application.properties or application.yml files, configures the Application Context, applies Auto-Configuration if configured, Starts Embedded Server in a web app and returns the applicationContext.
+
+@SpringBootApplication consists of 3 annotations. PFB
+-> @SpringBootConfiguration -> @Configuration
+-> @EnableAutoConfiguration
+-> @ComponentScan
+
+@SpringBootConfiguration : It internally is @Configuration, but conveys the semantic meaning that this @Configuration is for SpringBoot App.
+
+@Configuration : This annotation is part of the core Spring Framework and is used to denote that a class declares one or more bean definitions
+
+@ComponentScan : The @ComponentScan annotation is used in Spring applications to specify the base package for scanning Spring components such as @Component, @Service etc;
+
+----------AutoConfiguration In Spring Boot----------
+
+How AutoConfiguration is triggered : When the class provided to SpringApplication.run method has the @EnableAutoConfiguration annotation on it, spring looks into all the jars in the classpath for META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports file. If it finds classes in this file with @AutoConfiguration annotation, spring boot creates beans using these configuration classes.
+
+How @AutoConfiguration classes work : @AutoConfiguration classes are simple @Configuration classes which are used to create beans. These AutoConfiguration classes use conditional annotations to create a bean only when some conditions are met. For example, 
+	
+	@ConditionalOnClass
+	@ConditionalOnMissingClass
+	@ConditionalOnBean
+	@ConditionalOnMissingBean
+	@ConditionalOnProperty
+	@ConditionalOnResource
+	@ConditionalOnWebApplication
+	etc
+
+How the commonly used things get autoconfigured when using spring boot : The spring-boot-autoconfigure jar has the META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports file in it. In this file many @AutoConfiguration classes are declared for configuring common use cases, like DataSource, DispatcherServlet etc. As this jar comes built-in with spring boot, when a spring boot app runs, it applies all these configurations. Thus, the commonly used things get autoconfigured when using spring boot.
+
+Custom AutoConfiguration : To implement custom Auto-Configuration in our jar, we have create a @AutoConfiguration class and declare that class in the META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports file.
+
+ByPassing AutoConfiguration : We can disable/overwite spring boot's AutoConfiguration for specific components in multiple ways. 
+-> Using the exclude attribute of the @SpringBootApplication annotation
+-> Providing Custom @Configuration classes 
+-> Providing external properties in the application.properties file
+
+Spring Boot Starter Projects : Starter Projects are pre-configured project templates provided by the Spring Boot team to quickstart development for specific types of applications. There are different starter projects for different types of applications. These include the commonly required dependencies, making it convinent as we don't have to add every dependency overselvs. Some of the common starters are -
+->spring-boot-starter-web
+->spring-boot-starter-data-jpa
+->spring-boot-starter-actuator
+->spring-boot-starter-security
+
+Spring Boot Actuator : Spring Boot Actuator is a set of production-ready features provided by Spring Boot to monitor and manage your application in production. It includes built-in endpoints for health checks, metrics, environment information, application shutdown, and more.
+
+Enabling Actuator : We can enable actuator by adding spring-boot-starter-actuator dependency. We can controll endpoins enabled by adding properties as below.
+management.endpoints.web.exposure.include=health,info,metrics
+
+Common Endpoints :-
+-> /actuator/health : Provides application health status
+-> /actuator/beans : Provides info about the spring beans
+-> /actuator/caches : Provides info about cache managers
+-> /actuator/info : Provides custom application related info
+-> /actuator/metrics : Provides application performance and behaviour related info
+
+Spring Boot DevTools : Spring Boot DevTools is a set of development-time tools that aim to improve the development experience when working with Spring Boot applications. These tools provide features such as automatic application restarts, live reloading of resources, and enhanced debugging support. To enable devTools we have to add 'spring-boot-devtools' to the dependency.
+
+Changing Embaded Tomcat's Port : Using server.port property. We can also disable the embaded Tomcat by setting server.port=-1
+
+Profiles : To use multiple profiles in spring boot, we have to create different properties files named application-{profile}.xml and set spring.profiles.active property as true

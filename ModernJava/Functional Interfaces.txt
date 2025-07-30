@@ -1,0 +1,12 @@
+Function<T,R> IntFunction<R> LongFunction<R> DoubleFunction<R>
+ToIntFunction<T> ToLongFunction<T> ToDoubleFunction<T>
+IntToLongFunction IntToDoubleFunction
+LongToIntFunction LongToDoubleFunction
+DoubleToIntFunction DoubleToLongFunction
+UnaryOperator<T> IntUnaryOperator LongUnaryOperator DoubleUnaryOperator 
+BiFunction<T,U,R> ToIntBiFunction<T,U> ToLongBiFunction<T,U> ToDoubleBiFunction<T,U>
+BinaryOperator<T> IntBinaryOperator LongBinaryOperator DoubleBinaryOperator
+Predicate<T> IntPredicate LongPredicate DoublePredicate BiPredicate<T,U>
+Consumer<T>	IntConsumer DoubleConsumer LongConsumer 
+BiConsumer<T,U> ObjIntConsumer<T> ObjLongConsumer<T> ObjDoubleConsumer<T>
+Supplier<T>	BooleanSupplier IntSupplier LongSupplier DoubleSupplier  	

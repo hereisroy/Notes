@@ -1,0 +1,39 @@
+Part of the java.util.stream package. Stream uses an object of Collector to summarize the data in the terminal operation collect.
+
+public interface Collector<T, A, R>
+
+Below are the methods available in Collector interface
+
+Supplier<A> supplier() - returns a function that creates and returns a new mutable result container (Accumulator object)
+
+BiConsumer<A, T> accumulator() - A function that folds a value into a mutable result container
+
+BinaryOperator<A> combiner() - A function that accepts two partial results and merges them.  The combiner function may fold state from one argument into the other and return that, or may return a new result container. Only called by Parallel Streams. Used to combine results from different threads to make up the final result.
+
+Function<A, R> finisher() - Performs the final transformation from the intermediate accumulation type A to the final result type R
+
+Set<Characteristics> characteristics() - Returns a Set of Collector.Characteristics (Enum)  indicating the characteristics of this Collector.  This set should be immutable.
+	
+	Below are different options for Characteristics and their implications
+	
+		CONCURRENT : Indicates that in parallelStream all the threads can use the same accumulator object concurrently. If a collector is not CONCURRENT, every thread uses the supplier method to create a local accumulator object and the combiner method combines the accumulator objects from different threads.
+        If a CONCURRENT collector is not UNORDERED then it should only be evaluated concurrently if applied to an unordered data source. Else, order can be lost.
+		
+		UNORDERED : Indicates that the collection operation does not commit to preserving the encounter order of input elements
+		
+		IDENTITY_FINISH : Indicates that the finisher function is the identity function and can be skipped
+
+	To create an Object of Collector we can either implement the interface or use below methods of this interface
+	
+public static<T, R> Collector<T, R, R> of(Supplier<R> supplier,
+                                              BiConsumer<R, T> accumulator,
+                                              BinaryOperator<R> combiner,
+                                              Characteristics... characteristics)
+											  
+public static<T, A, R> Collector<T, A, R> of(Supplier<A> supplier,
+                                                 BiConsumer<A, T> accumulator,
+                                                 BinaryOperator<A> combiner,
+                                                 Function<A, R> finisher,
+                                                 Characteristics... characteristics)
+									
+Streams can conceptually be thought of as a single loop. When using the collect method, the Collector object's supplier method is called before the loop to create the accumulation object. Inside the loop the accumulator method is called for every element. In case of Non-Concurrent parallelStream, after the loop ends for each Thread, combine method is called by one or multiple Threads. Then finisher method is called after the loop for any required transformations.

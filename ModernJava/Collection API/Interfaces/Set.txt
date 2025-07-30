@@ -1,0 +1,7 @@
+extends Collection<E>
+
+Below is the list of extra methods (not present in Collection Interface) in Set Interface
+
+Methods to create unmodifiable Set:
+static <E> List<E>	copyOf(Collection<? extends E> coll)
+static <E> List<E>	of(), of(E... elements), of(E e1),...

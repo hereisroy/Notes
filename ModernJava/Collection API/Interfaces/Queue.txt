@@ -1,0 +1,17 @@
+public interface Queue<E> extends Collection<E>
+
+Below is the list of extra methods (not present in Collection Interface) in Queue Interface
+
+boolean offer(E e) - Inserts the specified element into this queue if it is possible to do so immediately without violating capacity restrictions. Returns true if the element was added to this queue, else returns false. Does not throw an exception if capacity is full.
+
+E peek() - Retrieves, but does not remove, the head of this queue or returns null if this queue is empty.
+
+E element() - Retrieves, but does not remove, the head of this queue. Throws an exception if this queue is empty.
+
+E poll() - Retrieves and removes the head of this queue or returns null if this queue is empty.
+
+E remove() - Retrieves and removes the head of this queue. Throws an exception if this queue is empty.
+
+
+
+

@@ -1,0 +1,16 @@
+Unlike HashSet, which does not guarantee any specific order, LinkedHashSet maintains the order in which elements were inserted
+Internally, LinkedHashSet uses a doubly-linked list to maintain the insertion order of the elements.
+Maintains the insertion order while offering constant time operations, but with more memory overhead than HashSet
+
+
+public class LinkedHashSet<E>
+    extends HashSet<E>
+    implements Set<E>, Cloneable, java.io.Serializable
+	
+Below are the extra methods (Not present in HashSet Class) in this class
+
+Constructors :
+LinkedHashSet() - Constructs a new, empty linked hash set with the default initial capacity (16) and load factor (0.75)
+LinkedHashSet(int initialCapacity)
+LinkedHashSet(int initialCapacity, float loadFactor)
+LinkedHashSet(Collection<? extends E> c)

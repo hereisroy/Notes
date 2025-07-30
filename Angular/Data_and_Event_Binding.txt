@@ -1,0 +1,72 @@
+			------------- Event Binding ----------
+			
+Event Binding : Used to handle events such as clicks, key presses, mouse movements, and more. It connects DOM events (e.g., user input) to component methods or expressions, allowing the application to respond to user actions.
+
+	Syntax : (event)="method()"
+	
+	Example Angular events :-
+		
+		click 	: 	<button (click)="onClick()">Click me</button>
+		input 	: 	<input (input)="onInput($event)">
+		change 	: 	<input type="text" (change)="onChange($event)">
+		keyup	: 	<input (keyup)="onKeyUp($event)">
+		
+		
+Event Handler Arguments : You can pass data to the event handler method, including the $event object, which contains information about the event.
+
+	Example : <input (input)="onInput($event)">
+	
+Event Filtering : Allows you to handle only specific key events (like pressing Enter, Esc, etc.) without writing additional logic in the component class. designed to work with keyboard events like keyup, keydown, and keypress, as it filters specific keys.
+
+	Syntax Example : (keyup.enter)="onEnter()", (keyup.escape)="onEscape()"
+
+
+
+			-------- Data Binding ----------
+
+Text Interpolation : Used to bind component data (properties, methods, or expressions) to text content inside the HTML. Interpolation evaluates expressions as strings. 
+
+	Syntax : {{ expression }}
+	
+Property Binding : Used to bind component properties or expressions directly to HTML element properties or DOM attributes.
+
+	Syntax: [property]="expression" where property is the property of the HTML element and expression is evaluated from the component.
+	
+Class Binding : allows you to dynamically add or remove CSS classes to an HTML element based on a condition or expression in your component.
+
+	Basic Class Binding : You can bind a specific class to an element based on an expression's truthy or falsy value. If the expression evaluates to true, the class is added otherwise, it is removed.
+	
+		Syntax : [class.className]="condition"
+	
+	Class Binding with Ternary Expressions : You can also use a ternary expression in class binding to assign one of two classes based on a condition
+		
+		Syntax : [class]="condition ? 'classOnTrue' : 'classOnFalse'"
+		
+	Multiple Classes : If you want to apply multiple classes conditionally, you can use the [ngClass] attribute directive. It allows you to apply multiple classes based on different conditions or even assign classes from an object.
+		
+		Syntax : [ngClass]="{ 'class1': condition1, 'class2': condition2 }"
+	
+Style binding : Allows you to dynamically set inline styles on an HTML element using values from your component. This is useful when you want to conditionally apply styles based on component data or logic.
+
+	Basic Style Binding : You can bind a style property to an expression from the component. Angular will update the style dynamically whenever the bound value changes.
+	
+		Syntax : [style.property]="expression"
+		
+	Multiple Styles : You can apply multiple styles at once using the [ngStyle] attribute directive. This is particularly useful when you need to apply more than one style dynamically.
+	
+		Syntax : [ngStyle]="stylesObject" / [ngStyle]="{ 'css-prop1': val1, 'css-prop2': val2 }"
+		
+		
+Template Reference Variables : In Angular, a template reference variable is a way to reference a DOM element, a component, or a directive within the template. It is defined by using the # symbol, and it allows you to access the referenced element or component directly in the template without using component class logic. Once defined, you can use the variable within the same template to access properties and methods of the DOM element, component, or directive it references.
+
+	Referencing a DOM Element :-
+		
+		Syntax Example : 
+			<input #myInput type="text" placeholder="Enter text">
+			<button (click)="logValue(myInput.value)">Log Input</button>
+			
+Two Way Data Binding : Allows synchronization of data between the model (component) and the view (template) in both directions. Any changes in the view are reflected in the model, and vice versa.
+
+	Syntax Example : <input [(ngModel)]="name" placeholder="Enter your name">
+	
+	For [(ngModel)] to work, you need to import the FormsModule in your Angular module.[(ngModel)] simplifies two-way data binding by combining property and event binding. It is useful for form controls like inputs, text areas, and select boxes, where you need to reflect changes back and forth between the component and view.

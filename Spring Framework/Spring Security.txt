@@ -1,0 +1,29 @@
+Spring Security is a customizable authentication and access-control framework
+
+Configuration :- 
+With Spring Boot : In a spring boot project adding spring-boot-starter-security enables spring security. Spring Boot auto configs SecurityFilterChain and adds that to servlet context. Also it auto configs an InMemoryUserDetailsManager with a user and auto generated pwd which is printed in the console and adds auth to all endpoints.
+Without Spring Boot : Create a @Configuration class and @EnableWebSecurity for adding default configuration. Create SecurityFilterChain bean. Create a class which extends AbstractSecurityWebApplicationInitializer to add the SecurityFilterChain to the servlet context.
+
+Components :-
+-> SecurityFilterChain : List of filters which comes built in and does different security related tasks. For exmaple, 'UsernamePasswordAuthenticationFilter' handles form-based authentication, 'SecurityContextPersistenceFilter' handles session based auth. We can also add custom filters.
+-> AuthenticationManager : The authentication manager in Spring Security is a central component responsible for authenticating users based on the provided credentials. Uses Authentication Providers to authenticate the user. Returns Authentication object on successfull auth.
+-> AuthenticationProvider: Spring Security comes with different providers, these are rersponsible for running the authentication logic and validates user credentials. Some of the built in providers are, DaoAuthenticationProvider, LdapAuthenticationProvider etc.
+-> UserDetailsService : Has only one method, loadUserByUsername. This takes username and returns UserDetails. DaoAuthenticationProvider requires a userDetailsService bean.
+-> PasswordEncoder : Used to encode and decode pwd.
+-> GrantedAuthority : GrantedAuthority represents an authority granted to an authenticated principal.
+-> SecurityContext : Represents the security-related context associated with the request. It typically contains the authenticated principal (e.g., user details), as well as any granted authorities or other security-related information.
+-> SecurityContextHolder : Stores the SecurityContext in ThreadLocal and provides static methods (getContext()) using which get can get access to SecurityContext from anywhere in the application code.
+
+Authorization : Authorization or Access-Control can be implemented in Spring Security in different ways.
+-> HttpSecurity : When creating the SecurityFilterChain bean using HttpSecurity object, we add role based access control.
+-> Method Security : We can use @Secured("ROLE"), @PreAuthorize and @PostAuthorize on methods to secure them.
+
+JwtBasedAuthentication : As Spring Security does not provide a AuthenticationProvider for JwtBasedAuthentication, we typically create a custom filter and add that in the SecurityFilterChain using the HttpSecurity. In this filter we verify the signature and setAuthentication to the SecurityContextHolder. We do not need any AuthenticationManager and Providers when using this approach.
+
+Servlet API Integration : We can use the request.getUserPrincipal() and request.isUserInRole("Role") methods on the HttpServletRequest object.
+
+
+
+
+
+

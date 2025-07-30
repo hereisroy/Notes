@@ -1,0 +1,69 @@
+Transaction Management : Transaction Management in Software Development refers to the process of ensuring that a series of operations on a system either complete entirely or have no effect at all. This is crucial when dealing with operations that modify data or involve multiple resources (like databases, message brokers, or filesystems), to maintain data integrity, consistency, and reliability.
+
+In Java, resource specific APIs provide methods to manage Transactions Programatically. Like, JDBC & JMS provide methods to commit and rollback.
+
+Spring uses the interface PlatformTransactionManager to provide a uniform programming model for various transaction APIs. Using TransactionTemplate or PlatformTransactionManager we can manage transactions for different resources with the same methods programatically.
+
+Spring Framework also enables Declarative Transaction Management using @Transactional Annotation.
+Attributes of @Transactional includes propagation, isolation, rollbackFor.
+
+| Propagation Type | Description                                      |
+| ---------------- | ------------------------------------------------ |
+| `REQUIRED`       | Join existing or create new (default)            |
+| `REQUIRES_NEW`   | Always create a new transaction                  |
+| `NESTED`         | Executes within a nested transaction if possible |
+| `SUPPORTS`       | Join if exists; else no transaction              |
+| `NOT_SUPPORTED`  | Always runs **without** a transaction            |
+| `MANDATORY`      | Must join an existing transaction                |
+| `NEVER`          | Must not run inside a transaction                |
+
+| Isolation Levels   | Description                      |
+| ------------------ | -------------------------------- |
+| `DEFAULT`          | Use DB default                   |
+| `READ_UNCOMMITTED` | Allows dirty reads               |
+| `READ_COMMITTED`   | No dirty reads                   |
+| `REPEATABLE_READ`  | No dirty or non-repeatable reads |
+| `SERIALIZABLE`     | Full isolation (slowest, safest) |
+
+Spring's transaction management support is primarily provided by the spring-tx module. This module has the PlatformTransactionManager Interface. But other modules also provide functionalities.
+
+| Module                         | Purpose                                                                |
+| ------------------------------ | ---------------------------------------------------------------------- |
+| `spring-context`               | Enables `@Transactional`, AOP proxy support                            |
+| `spring-aop`                   | Required for annotation-driven transactions (via proxies)              |
+
+| **Module**            | **Implementation Class**       | **Description**                                            |
+| --------------------- | ------------------------------ | ---------------------------------------------------------- |
+| `spring-tx`           | *(interface only)*             | Core transaction abstraction; no direct implementation     |
+| `spring-jdbc`         | `DataSourceTransactionManager` | For plain JDBC transactions using a `DataSource`           |
+| `spring-orm`          | `JpaTransactionManager`        | For JPA (e.g., Hibernate, EclipseLink)                     |
+| `spring-orm`          | `HibernateTransactionManager`  | Direct Hibernate (native API) – rarely used in modern apps |
+| `spring-orm`          | `JdoTransactionManager`        | For Java Data Objects (JDO) – less common                  |
+| `spring-jms`          | `JmsTransactionManager`        | For managing transactions in JMS operations                |
+| `spring-tx` 			| `JtaTransactionManager`        | For distributed (XA) transactions via JTA                  |
+| `spring-data-neo4j`   | `Neo4jTransactionManager`      | For Neo4j graph database (Spring Data)                     |
+| `spring-data-mongodb` | `MongoTransactionManager`      | For MongoDB (requires replica set or sharded cluster)      |
+| `spring-data-redis`   | `RedisTransactionManager`      | For Redis transaction support (limited use)                |
+| `spring-data-r2dbc`   | `R2dbcTransactionManager`      | For reactive relational database access                    |
+
+@EnableTransactionManagement is a Spring configuration annotation that enables annotation-driven transaction management, allowing the use of @Transactional in your application.
+
+| Scenario                                | Is `@EnableTransactionManagement` Needed? |
+| --------------------------------------- | ----------------------------------------- |
+| Spring Boot with JPA/JDBC starters      | ❌ Not needed — auto-configured            |
+| Plain Spring app (no Boot)              | ✅ Yes — required                          |
+| Custom proxy behavior or advanced setup | ✅ Yes — if customizing                    |
+
+JTA (Java Transaction API) is a standard Jakarta EE API that allows applications to manage distributed transactions — i.e., transactions that span multiple transactional resources.
+
+| Component            | Description                   																		|
+| -------------------- | ---------------------------------------------------------------------------------------------------|
+| `UserTransaction`    | Allows the application to manually control transaction boundaries                 					|
+| `TransactionManager` | Typically used by containers (e.g., Spring, JEE servers) to manage transactions       				|
+| `XAResource`         | Interface implemented by resources (like DBs or JMS) to participate in a distributed transaction	|
+
+Jakarta EE application servers (e.g., WildFly, WebSphere, GlassFish) and standalone JTA transaction managers (such as Atomikos or Bitronix) provide implementations of the UserTransaction interface, which can be used to programmatically manage distributed transactions across multiple XA-capable resources (like databases and message queues). Jakarta EE application servers also provide Declarative JTA Support.
+
+Spring integrates well with all the JTA Transaction Managers (Jakarta EE application servers & standalone JTA transaction managers). Spring provides JtaTransactionManager class, the main Spring implementation of PlatformTransactionManager for JTA-based transactions. Both Programatic & Declarative abstractions work with JTA.
+
+Spring boot provides Starters for Popular JTA Providers (standalone JTA transaction managers). When included, Spring Boot Auto-configures its UserTransaction, TransactionManager and Spring's JtaTransactionManager.

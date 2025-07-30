@@ -1,0 +1,15 @@
+public class LinkedList<E>
+    extends AbstractSequentialList<E>
+    implements List<E>, Deque<E>, Cloneable, java.io.Serializable
+
+Data Structure Representation : Doubly linked list, Double ended queue & Stack
+Internal Data Structure : Doubly linked list
+Below are the extra methods (Not present in List & Deque) in this class
+
+Constructors :
+LinkedList() - Constructs an empty list.
+LinkedList(Collection<? extends E> c) - Constructs a list containing the elements of the specified collection, in the order they are returned by the collection's iterator.
+
+Others :
+Iterator<E> descendingIterator() - Returns an iterator that iterates over the elements of the list in reverse order (from the last element to the first).
+

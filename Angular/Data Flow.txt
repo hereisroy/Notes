@@ -1,0 +1,67 @@
+Parent to Child : Use @Input() in the child component to declare properties that will receive data. Use property binding in the parent component's template to pass the data down to the child component.
+
+	Example : 
+		export class ChildComponent {
+		  @Input() message: string = '';  // Declare input property
+		}
+		<app-child [message]="parentMessage"></app-child>
+
+Child to Parent (@ViewChild) : In Angular, you can access data or call methods in a child component from a parent component using the @ViewChild decorator. This allows the parent component to interact directly with the child component's properties and methods.
+
+	Example :
+	
+		@ViewChild(ChildComponent) childComponent!: ChildComponent;
+	
+	ngAfterViewInit lifecycle hook: @ViewChild cannot access the child component immediately in the constructor or ngOnInit hook. You should use ngAfterViewInit to ensure the child component is fully initialized.
+
+Child to Parent (EventEmitter) : In Angular, to pass data from a child component to a parent component, you can use EventEmitter along with the @Output decorator. This allows the child component to emit events that the parent component can listen to, and in those events, the child can pass data to the parent.
+
+	Steps :-
+	
+		1. In the child component, use @Output and EventEmitter to emit data to the parent component. 
+			
+			Example - 
+				export class ChildComponent {
+				  // Define an EventEmitter and decorate it with @Output
+				  @Output() dataEmitter: EventEmitter<string> = new EventEmitter<string>();
+
+				  // Function to emit data to the parent (Bound with some child event like click)
+				  sendDataToParent() {
+					const data = 'Hello from Child!';
+					this.dataEmitter.emit(data);  // Emit data to the parent
+				  }
+				}
+		2. In the parent component's template, bind to the event from the child component using the event binding syntax ().
+		
+			Example -
+				<app-child (dataEmitter)="receiveData($event)"></app-child>
+				<p>Data from Child: {{ childData }}</p>
+		3. In the parent component class, define the method to handle the emitted data.
+		
+			Example -
+				export class ParentComponent {
+				  childData: string = '';  // Variable to hold data from child
+
+				  // Method to receive data from child
+				  receiveData(data: string) {
+					this.childData = data;
+					console.log('Received from Child: ', this.childData);
+				  }
+				}
+				
+Content Projection : In Angular, content projection allows you to pass content from a parent component into a child component, giving the child component the ability to display dynamic content defined by the parent. This is done using the ng-content directive in the child component's template.
+
+	Basic Single-Slot Content Projection: In single-slot content projection, the child component uses a single <ng-content></ng-content> directive to project any content placed inside its tags by the parent component.
+	
+	Multi-Slot Content Projection : Allows you to project different sections of content into specific slots in the child component by using CSS selectors with ng-content.
+	
+		Example : 
+			Child Component Template -
+				 <div class="header">
+				  <ng-content select="[header]"></ng-content> <!-- Projects content with the 'header' attribute -->
+				</div>
+			Parent Component Template -
+				<app-child>
+				  <p header>This is the header content from the Parent!</p>
+				  <p>This is the body content from the Parent!</p>
+				</app-child>

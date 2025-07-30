@@ -1,0 +1,42 @@
+Provides various utility methods to create different types of collectors, which are used to transform and accumulate elements of a stream into collections, strings, or other data types
+
+public final class Collectors
+
+Below are the methods of this class
+
+
+Methods to accumulate elements into Collections : 
+Collector<T, ?, C> toCollection(Supplier<C> collectionFactory)
+Collector<T, ?, List<T>> toList()
+Collector<T, ?, List<T>> toUnmodifiableList()
+Collector<T, ?, Set<T>> toSet()
+Collector<T, ?, Set<T>> toUnmodifiableSet()
+Collector<T, ?, Map<K,U>> toMap(Function<? super T, ? extends K> keyMapper,
+								Function<? super T, ? extends U> valueMapper)
+Collector<T, ?, Map<K,U>> toMap(Function<? super T, ? extends K> keyMapper,
+								Function<? super T, ? extends U> valueMapper,
+								BinaryOperator<U> mergeFunction)
+Collector<T, ?, M> toMap(Function<? super T, ? extends K> keyMapper,
+						 Function<? super T, ? extends U> valueMapper,
+						 BinaryOperator<U> mergeFunction,
+						 Supplier<M> mapFactory)
+Collector<T, ?, Map<K,U>> toUnmodifiableMap(Function<? super T, ? extends K> keyMapper,
+											Function<? super T, ? extends U> valueMapper)
+Collector<T, ?, Map<K,U>> toUnmodifiableMap(Function<? super T, ? extends K> keyMapper,
+											Function<? super T, ? extends U> valueMapper,
+											BinaryOperator<U> mergeFunction)
+											
+Aggregate methods :
+Collector<T, ?, Long> counting()
+Collector<T, ?, Optional<T>> minBy(Comparator<? super T> comparator)
+Collector<T, ?, Optional<T>> maxBy(Comparator<? super T> comparator)
+Collector<T, ?, Integer> summingInt(ToIntFunction<? super T> mapper) 
+Collector<T, ?, Long> summingLong(ToLongFunction<? super T> mapper)
+Collector<T, ?, Double> summingDouble(ToDoubleFunction<? super T> mapper)
+Collector<T, ?, Double> averagingInt(ToIntFunction<? super T> mapper)
+Collector<T, ?, Double> averagingLong(ToLongFunction<? super T> mapper)
+Collector<T, ?, Double> averagingDouble(ToDoubleFunction<? super T> mapper)
+Collector<T, ?, IntSummaryStatistics> summarizingInt(ToIntFunction<? super T> mapper)
+Collector<T, ?, LongSummaryStatistics> summarizingLong(ToLongFunction<? super T> mapper)
+Collector<T,?,DoubleSummaryStatistics> summarizingDouble(ToDoubleFunction<? super T> mapper)
+											

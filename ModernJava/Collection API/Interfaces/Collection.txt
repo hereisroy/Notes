@@ -1,0 +1,33 @@
+extends Iterable<E>
+
+Methods to add element(s):
+boolean	add(E e)
+boolean	addAll(Collection<? extends E> c)
+
+Methods to Remove element(s):
+boolean	remove(Object o)
+boolean	removeAll(Collection<?> c)
+boolean	retainAll(Collection<?> c)
+default boolean	removeIf(Predicate<? super E> filter)
+void	clear()
+
+Methods to get info about collection:
+int	size()
+boolean	isEmpty()
+boolean	contains(Object o)
+boolean	containsAll(Collection<?> c)
+boolean	equals(Object o)
+int	hashCode()
+
+Methods to create array with elements:
+Object[]	toArray()
+<T> T[]	toArray(T[] a)
+default <T> T[]	toArray(IntFunction<T[]> generator)
+
+Methods to get stream:
+default Stream<E>	stream()
+default Stream<E>	parallelStream()
+
+Methods to get iterator:
+Iterator<E>	iterator()
+default Spliterator<E>	spliterator()

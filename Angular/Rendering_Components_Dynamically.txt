@@ -1,0 +1,10 @@
+ngComponentOutlet : A structural directive used to dynamically insert or render a component in the template. Allows for a declarative approach in the template to insert a component based on logic in the parent component.
+
+	Syntax : <ng-container *ngComponentOutlet="component"></ng-container>
+
+
+ViewContainerRef : A class that provides a reference to a container where one or more views (either components or templates) can be dynamically added. It gives you programmatic control over adding, removing, and manipulating components or views in the DOM during runtime.
+
+	Basic Usage
+		Inject ViewContainerRef in your component or directive.
+		Use ViewContainerRef to create, insert, or remove components or views dynamically.

@@ -1,0 +1,5 @@
+Parent Interface of Collection. In this sense it is the root class of Collections Framework. Implementing this interface allows an object to be the target of the enhanced for loop. This interface was introduced in Java 5. Before that the only way to iterate over a Collection was by using an Iterator explicitly via the iterator() method.
+
+Iterator<T> iterator()
+default void forEach(Consumer<? super T> action)
+default Spliterator<T> spliterator()

@@ -1,0 +1,33 @@
+extends Collection<E>
+
+Below is the list of extra methods (not present in Collection Interface) in List Interface
+
+Methods to create unmodifiable list:
+static <E> List<E>	copyOf(Collection<? extends E> coll)
+static <E> List<E>	of(), of(E... elements), of(E e1),...
+
+Method to get element:
+E	get(int index)
+
+Methods to add element(s) at index:
+void	add(int index, E element)
+boolean	addAll(int index, Collection<? extends E> c)
+
+Methods to Remove element from index:
+E	remove(int index)
+
+Methods to get index of element:
+int	indexOf(Object o)
+int	lastIndexOf(Object o)
+
+Methods to modify List:
+E 		set(int index, E element)
+default void	replaceAll(UnaryOperator<E> operator)
+default void	sort(Comparator<? super E> c)
+
+Method to get Iterator:
+ListIterator<E>	listIterator()
+ListIterator<E>	listIterator(int index)
+
+Other Methods :
+List<E>	subList(int fromIndex, int toIndex)

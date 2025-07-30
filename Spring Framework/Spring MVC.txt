@@ -1,0 +1,46 @@
+Spring MVC, which stands for Spring Model-View-Controller, is a web framework provided by the Spring Framework for building web applications
+
+Configuration : When using Spring MVC without Spring Boot, we can use either xml based or java based config to setup Spring MVC.
+->XML Based : Add DispatcherServlet in web.xml and pass contextConfigLocation to enable Spring MVC.
+->Java Based : extend AbstractAnnotationConfigDispatcherServletInitializer and return a class having @Configuration and @EnabeWebMvc in the getServletConfigClasses() method.
+
+Java Based Config Explanation (Servlet 3.0+) : On startup the Application server finds implementations of ServletContainerInitializer SPI, spring-web jar provides SpringServletContainerInitializer, this class looks for implementations of WebApplicationInitializer. Some super class of AbstractAnnotationConfigDispatcherServletInitializer, which is an abstract class, implements WebApplicationInitializer, thus by implementing it, the user provided class implemets WebApplicationInitializer. And the user provided class gets called which has access to the servletContext and adds the dispatcher servlet to it.
+
+-> Spring Boot Config : To enable Spring MVC in a Spring Boot app, we just need to add 'spring-boot-starter-web' to dependency.
+
+Components of Spring MVC :-
+-> DispatcherServlet : Acts as the  front controller. Receives all incoming requests and manages request lifecycle. 
+-> Controller : Java classes annotated with @Controller or @RestController annotations. contain handler methods responsible for handling incoming HTTP requests.
+-> Model : The Model represents the application's data. Controllers populate the Model with data and pass it to the View for rendering
+-> View : Views are responsible for rendering the user interface and presenting data to the user
+-> Handler Mapping : DispatcherServlet uses Handler Mapping to direct requests to the appropriate controllers
+-> View Resolver : After controllers fill model, they return view names. Dispatcher servlet uses view resolvers to direct the request to the proper view. Spring Boot auto configures a InternalResourceViewResolver with blank prefix and suffix. We can use property 'spring.mvc.view.prefix' and 'spring.mvc.view.suffix' to set values. Or we can create a view resolver bean.
+
+Annotations:-
+->@Controller : Marks a class as a controller
+->@RestController : Marks a class as a controller who's return values are to be written to response
+->@RequestMapping : This annotation is used to map web requests to specific handler methods inside a controller. It can be applied at the class level or at the method level
+->@GetMapping, @PostMapping, @PutMapping, @DeleteMapping : Maps request for specific HTTP methods.
+->@PathVariable : binds a method parameter to a URI template variable
+->@RequestParam : binds a method parameter to a query parameter
+->@RequestBody : bind the body of a HTTP request to a method parameter
+->@ResponseBody : used to indicate that the return value of a method should be serialized directly into the HTTP response body
+->@ModelAttribute : binds method parameters to model attributes(POJO/DTO). Also @ModelAttribute when applied to methods inside controllers are run before each handler method for adding common model attribute data.
+->@ExceptionHandler(Exception.class) : Used to create exception handling methods within controllers to handle specific exceptions thrown during request processing
+->@ControllerAdvice : When applied to a class, methods inside that are run for each request for all controllers. Mostly used for global error handling and setting global model attributes.
+
+Passing data to the view : Spring MVC provides built in classes for sending data to view. Just by adding a object of any these classes in the handler method, we get a object which is auto passed to the view.
+->Model : use addAttribute("key", "value") to add value in controller and use getAttribute("key") to get value in view
+->ModelMap : same methods as Model. Different Implementation.
+->ModelAndView : Can pass Model and View together.
+
+Interceptors : Interceptors in Spring MVC are components that allow you to intercept and preprocess requests and responses before and after they reach the controller. To implement an interceptor create a class that implements the HandlerInterceptor interface and override methods preHandle, postHandle & afterCompletion. Then impelement WebMvcConfigurer and add to InterceptorRegistry by overriding addInterceptors method for specific path patterns.
+
+Data Validation : Spring MVC helps in data validation in 2 ways-
+->Java Bean Validation API : This API provides constraint annotations which we can use in POJO/DTO fields. Then use @Valid annotation in the controller method param to validate. Below are some constraints available.
+@NotNull, @NotEmpty, @NotBlank, @Size, @Positive, @Negative...
+-> Using Spring's Validator : Implement Validator interface and use @InitBinder method in the controller to add the Validator. Then use @Valid annotation in the controller method param to validate
+
+In both cases, we get a BindingResult object, using which we can access the errors.
+
+I18n : Configure a MessageSource and a LocaleResolver bean and use them for i18n.

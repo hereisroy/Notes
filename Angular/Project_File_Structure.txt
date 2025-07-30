@@ -1,0 +1,41 @@
+-------Angular------------
+
+angular.json (file) -> a configuration file that defines the build, serve, and test settings for your Angular project
+
+src (directory) -> is the root directory for your application's source code
+	
+	index.html: This is the main HTML file of your application, which serves as the entry point for the browser.
+	main.ts: This is the bootstrap file for your application, where the Angular module is bootstrapped.
+
+public (directory) -> used to store static assets that are not processed by Angular's build system. These assets are directly copied to the output directory during the build process, preserving their original structure and content.
+
+.angular (directory) -> Angular stores cache here to speed up the build process.
+
+---------- NPM --------------
+
+node_modules (directory) : directory is created by npm (Node Package Manager) when you run the npm install command. It is the directory where all the dependencies (libraries and packages) specified in your project’s package.json file are installed.
+
+package.json: Lists the direct dependencies of your project under the dependencies and devDependencies sections. npm uses this file to figure out which packages to install.
+
+package-lock.json: This file locks the exact version of each installed package. It ensures that every time npm install is run, the same package versions are installed, preventing issues from version mismatches.
+
+---------- VS Code -----------
+
+.vscode (directory) : located at the root of your project and contains workspace-specific settings and configurations for VS Code. This folder is automatically created when you modify or add settings specific to the project or workspace.
+
+.editorconfig : is used to maintain consistent coding styles between different editors and IDEs for a project. It defines coding conventions like indentation, line endings, and character encoding that are respected by many popular code editors, including Visual Studio Code (VS Code).
+
+
+--------- TypeScript --------------
+
+tsconfig.json: This is the primary configuration file for TypeScript in your Angular project
+
+tsconfig.app.json: This file is an extended configuration of tsconfig.json specifically for the Angular app’s development environment. It helps separate the main TypeScript config from the app-specific one.
+
+tsconfig.spec.json: file is a specialized TypeScript configuration file in Angular projects that is used specifically for compiling test files. It provides configuration options for TypeScript when running unit tests. These tests are usually written in .spec.ts files, using testing frameworks like Jasmine or Karma.
+
+---------- Others ------------
+
+.gitignore : This file lets git know which files to ignore.
+
+README.md : A Markdown-formatted text file that provides essential information about a project. It’s typically the first file people read when they visit your project's repository, especially on platforms like GitHub, GitLab, or Bitbucket. The .md extension stands for Markdown, a lightweight markup language that makes it easy to write formatted text using a simple syntax.

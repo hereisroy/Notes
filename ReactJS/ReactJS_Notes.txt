@@ -1,0 +1,47 @@
+emmet is VSCode plugin which enables shortcut way of writing HTML
+To use emmet inside JSX add language into emmet in VSCode settings. Add javascript - javascriptreact key value pair.
+Simple React Snippet : It is another VSCode plugin to generate code for reactjs.
+check node version : node -v
+
+Create React App (CRA) : Tool to bootstrap react apps. We can create new apps with it. It also gives us the required environment to run,build,test the new app.
+Command to create App : npx create-react-app <app_name>
+
+-----FileStructure----
+node_modules : dependencies are stored here by npm
+public : All the public files are here.
+src : All the source code is here.
+	index.js : responsible for adding root componenet (App) into the index.html file 
+package.json : have dependencies listed. Also enable build, test, start commands with npm.
+-----FileStructure----
+
+command to start local dev server : npm run start
+
+NodeJS by default uses CommonJS (require) for modular code. But post NodeJS 14 it supports ES Modules (import) with type='module' set in package.json file. When working with react we use ES module syntax.
+
+Components : Componenets are js files which export a function. The name of the function must start with a capital letter. And it should return JSX or null.
+
+A React child refers to anything placed between the opening and closing tags of a React component.
+
+Dynamic Value in JSX : We use curley braces {} inside JSX for dynamic values. We can use variables and JS Statements inside these curley braces. We can not use objects.
+
+Component creation notes :-
+The js file name does not have to match the component name but it is recommended for mantainability.
+We can have multiple componenets in a single file but we can have only one default export.
+
+To use a componenet as the child of another componenet we can use a tag with the child componenet name inside the parent componenet.
+
+Also check CSS Modules & Styled Components 
+
+When using Create React App, if we import any css files it is automatically added to the head section as a style block in dev setup. In case of a build, all the imported css in all the componenets are consolidated and minified in a main.css file.
+By default, styling is global. The styling in one css file which is imported in the componenet can effect all componenets.
+Hirarchy wise, there is index.css -> App.css -> custom css files
+For inline styles we need to use an object with camle cased prop names. Strings are not valid in react as inline style.
+
+To add a function call in a button for any event, ex-onClick, we use function ref inside cruley braces. If we need to pass param, we use a arrow function inline.
+The event object is passed as the first param.
+
+useState is a built in method that takes a initital value and returns an array with two values. One is the current value of the state and another is a function to update the current value of the state.
+When the state is updated, the corresponding JSX is re-rendered and the UI is updated.
+
+Rendering array of dynamic objects :  React treats array as multiple dynamic values. When passed an array of JSX, it creates a DOM element under the current element for each JSX object. We use map method of array on the array of data to construct a JSX array inside curley braces. 
+When given an array of JSX, a key attribute should be there in each element, having unique value. This is used internally by react to efficiently re-render the UI on changes. 

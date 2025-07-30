@@ -1,0 +1,60 @@
+Directives : Classes that allow developers to attach behavior to elements in the DOM. They are a core feature of Angular, enabling the modification of DOM structure and appearance by adding logic and functionality to HTML elements.
+
+	Types of Directives : Component, Structural, Attribute & Custom
+	
+	Component Directive : Components are a special type of directive with a template. Every Angular component is essentially a directive that controls a part of the user interface.
+	
+	Structural Directives: responsible for HTML layout. They shape or reshape the DOM's structure, typically by adding, removing, and manipulating the host elements to which they are attached.
+
+		ngIf : Conditionally creates or disposes of subviews from the template.
+		
+			Example Usage :-
+			
+				Import NgIf directive from '@angular/common' and add in component imports
+				<p *ngIf="isActive; else elseTemplate">Hello {{ person }}, header works!</p>
+				<ng-template #elseTemplate>
+				  Content is visible when condition is false!
+				</ng-template>
+				
+		ngFor : Repeat a node for each item in a list.
+		
+			Example Usage :-
+			
+				Import NgFor directive from '@angular/common' and add in component imports
+				<li *ngFor="let fruit of fruits; let i = index; let c = count">{{i}}. {{ fruit }} </li>
+				
+		ngSwitch : a structural directive used to conditionally display different templates based on a value. It works similarly to a switch statement in JavaScript. The ngSwitch directive is used on a container element, and then multiple ngSwitchCase directives are used to define possible cases, with ngSwitchDefault for a fallback case.
+		
+			
+			Example Usage :-
+			
+				<div [ngSwitch]="expression">
+				  <div *ngSwitchCase="'value1'">Content for value 1</div>
+				  <div *ngSwitchCase="'value2'">Content for value 2</div>
+				  <div *ngSwitchCase="'value3'">Content for value 3</div>
+				  <div *ngSwitchDefault>Default content</div>
+				</div>
+				
+	Attribute Directives : Used to change the appearance or behavior of DOM elements. Unlike structural directives (like *ngIf or *ngFor), which modify the DOM by adding or removing elements, attribute directives only change the element they are applied to, often by modifying styles, classes, or event behaviors.
+		
+		ngStyle : Adds or removes a set of inline styles.
+		
+			Example : 
+				<div [ngStyle]="{ 'color': textColor, 'font-size': fontSize + 'px' }">
+				  This text will change its color and font size dynamically.
+				</div>
+			
+		ngClass : Adds or removes a set of CSS classes.
+		
+			Example : 
+				<div [ngClass]="{'active': isActive, 'disabled': !isActive}">
+				  This div will have 'active' class if isActive is true, otherwise 'disabled' class.
+				</div>
+				
+		NgModel : Adds two-way data binding to an HTML form element.
+		
+			Example : <input [(ngModel)]="name" placeholder="Enter your name">
+	
+			For [(ngModel)] to work, you need to import the FormsModule in your Angular module.[(ngModel)] simplifies two-way data binding by combining property and event binding. It is useful for form controls like inputs, text areas, and select boxes, where you need to reflect changes back and forth between the component and view.
+	
+		 

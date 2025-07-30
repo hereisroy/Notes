@@ -1,0 +1,28 @@
+The only Abstract method ->
+	
+	int	compare(T o1, T o2)
+	
+Methods to create comparator ->
+static Comparator<T> naturalOrder()
+static Comparator<T> reverseOrder()
+static Comparator<T> comparing(Function<T,U> keyExtractor)
+static Comparator<T> comparing(Function<T,U> keyExtractor, Comparator<U> keyComparator)
+static Comparator<T> comparingInt(ToIntFunction<T> keyExtractor)
+static Comparator<T> comparingLong(ToLongFunction<T> keyExtractor)
+static Comparator<T> comparingDouble(ToDoubleFunction<T> keyExtractor)
+
+Methods to create compound comparator ->
+default Comparator<T> reversed()
+default Comparator<T> thenComparing(Comparator<T> other)
+default Comparator<T> thenComparing(Function<T,U> keyExtractor)
+default Comparator<T> thenComparing(Function<T,U> keyExtractor, Comparator<U> keyComparator)
+default Comparator<T> thenComparingInt(ToIntFunction<T> keyExtractor)
+default Comparator<T> thenComparingLong(ToLongFunction<T> keyExtractor)
+default Comparator<T> thenComparingDouble(ToDoubleFunction<T> keyExtractor)
+static Comparator<T> nullsFirst(Comparator<T> comparator)
+static Comparator<T> nullsLast(Comparator<T> comparator)
+
+
+
+
+

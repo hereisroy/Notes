@@ -1,0 +1,18 @@
+public class ArrayList<E> 
+		extends AbstractList<E>
+		implements List<E>, RandomAccess, Cloneable, java.io.Serializable
+
+Data Structure : Resizable array
+Below are the extra methods (Not present in List) in this class
+
+Constructors :
+ArrayList() - Constructs an empty list with an initial capacity of ten
+ArrayList(int initialCapacity) - Constructs an empty list with the specified initial capacity
+ArrayList(Collection<? extends E> c) - Constructs a list containing the elements of the specified collection, in the order they are returned by the collection's iterator.
+
+Method to shallow copy :
+Object	clone()
+
+Methods to manage size :
+void	ensureCapacity(int minCapacity)
+void	trimToSize()

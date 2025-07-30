@@ -1,0 +1,2 @@
+du -> disk usage
+sudo du -h --max-depth=0 /path/to/directory

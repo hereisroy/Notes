@@ -1,0 +1,46 @@
+Angular templates support control flow blocks that let you conditionally show, hide, and repeat elements. This feature was introduced in Angular 17 (Nov2023) as a developer preview & was added as a feature in Angular 18 (May2024).
+
+	@if : The @if block conditionally displays its content when its condition expression is truthy. If you want to display alternative content, you can do so by providing any number of @else if blocks and a singular @else block.
+	
+		Example :-
+		
+					@if (a > b) {
+					  {{a}} is greater than {{b}}
+					} @else if (b > a) {
+					  {{a}} is less than {{b}}
+					} @else {
+					  {{a}} is equal to {{b}}
+					}
+	
+	@for : The @for block loops through a collection and repeatedly renders the content of a block. The collection can be any JavaScript iterable, but Angular has additional performance optimizations for Array values.
+	
+		Example :- 
+			
+					@for (item of items; track item.id; let idx = $index, e = $even) {
+					  <p>Item #{{ idx }}: {{ item.name }}</p>
+					} @empty{<p>No Items</p>}
+					
+		Contextual variables in @for blocks :-
+				
+					$count	Number of items in a collection iterated over
+					$index	Index of the current row
+					$first	Whether the current row is the first row
+					$last	Whether the current row is the last row
+					$even	Whether the current row index is even
+					$odd	Whether the current row index is odd
+					
+	@switch : The @switch blocks displays content selected by one of the cases matching against the conditional expression. The value of the conditional expression is compared to the case expression using the === operator.
+	
+		Example :- 
+					
+					@switch (condition) {
+					  @case (caseA) {
+						Case A.
+					  }
+					  @case (caseB) {
+						Case B.
+					  }
+					  @default {
+						Default case.
+					  }
+					}

@@ -1,0 +1,23 @@
+Underlying Data Structure: Hash table
+Ordering: Unordered (no guaranteed order of elements)
+Performance: Time complexity for add, remove, contains - O(1) on average
+Null elements: Allows one null element
+Use Case: When you don’t care about the order of elements and need fast lookups and insertions.
+
+public class HashSet<E>
+    extends AbstractSet<E>
+    implements Set<E>, Cloneable, java.io.Serializable
+	
+Below are the extra methods (Not present in Set Interface) in this class
+
+
+Constructors :
+HashSet() - Constructs a new, empty set. The backing instance has default initial capacity (16) and load factor (0.75)
+HashSet(int initialCapacity)
+HashSet(int initialCapacity, float loadFactor)
+HashSet(Collection<? extends E> c)
+
+Others :
+Object clone()
+	
+	

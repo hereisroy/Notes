@@ -1,0 +1,54 @@
+hibernate configuratio file path : src/hibernate.cfg.xml
+Getting session : SessionFactory sf = new Configuration().configure().buildSessionFactory(); Session session = sf.openSession();
+
+----------------- Model Configuration Annotations -----------------
+
+@Entity(name="") : Declares a class as an entity. Can optionally set name of entity which will set the name of the associated table to be the same.
+@Table(name="") : Can set table lavel properties. Such as, name. This does not set the entity name.
+@Id : Set a property of the POJO as the id of the table.
+@GeneratedValue(strategy = GenerationType.*) : Set the value of a column as auto generated.
+@Column(name="") : Can set column lavel properties. Such as, column name using name attribute.
+@Basic(fetch=FetchType.*, optional=true/false) : Can be used to set fetch for a column. Use optional = false to set a column as not null.
+@Transient : Can be used to ignore a column.
+@Temporal(TemporalType.*) : Can be used with a Date column to save date&time/date/time
+@Lob : Can be used with String property to make it a text in db and can be used with byte[] to make it a blob in db.
+
+@Embeddable : Makes a POJO embeddable in an Entity.
+@Embedded : Embeds a POJO in a Entity.
+* Only one of @Embeddable/@Embedded is required to embed a class into an entity
+@AttributeOverrides : Used for overriding an embedded embeddable's properties. Takes an array of @AttributeOverride.
+@AttributeOverride(name="embeddable's property name", column=@Column(...)) : an array of this is passed to @AttributeOverrides as argument to override embeddable's column properties.
+@EmbeddedId : To use an embeddable's all properties as the primary key.
+
+@ElementCollection(fetch = FetchType.*) : To add a collection into an Entity. Can be collection of embeddables as well. Fetch type can be set for lazy or eager loading.
+* Must add @Embeddable or @Embedded to have a collection of embeddables
+@CollectionTable((name = "", joinColumns = {@JoinColumn(name="")})) : To set name of the created table to store collection. To set name of the column being used as the forgein key.
+
+@OneToOne : Used to create one to one relation between two entities. Column is added to store the primary key of the entity. 
+@ManyToOne : Can be used to create a many to one mapping.
+* @OneToOne & @ManyToOne acts same technically but has simantically diff meaning 
+@JoinColumn(name="") : Used to set name of the column used as the foreign key in oneToOne mapping.
+@OneToMany(mappedBy = "") : Used to create one to many mappings. A new table is created to store primary keys of both entities. If there is a @ManyToOne mapping declared at the other entity, then that data can be re-used insted of creating a new table for the @OneToMany mapping by using mappedBy="nameOfTheOtherEntity'sPropertyHavingThisEntity". Thus, in case of OneToMany mappings it is benificial to have bi-directional ManyToOne mappings.
+@ManyToMany(mappedBy = "") : Can be used to create many to many mapping from one entity to onother. A Table is created to store primary keys of both entities. If bi-directional ManyToMany mapping is created then one mapping can use the table created for the other mapping istead of creating two seperate tables by using mappedBy attribute.
+@JoinTable(	name="", 
+			joinColumns = {@JoinColumn(name="")}, 
+			inverseJoinColumns = {@JoinColumn(name="")}	
+			)
+: Can set name of the table created to store mappings in case of oneToMany and ManyToMany. Can set the name of both the JoinColumn and inverseJoinColumn.
+
+
+-------------------- Saving and Getting Data ------------
+
+Begining a transaction : session.beginTransaction();
+commiting a transaction : session.getTransaction().commit();
+Saving an Entity :  session.save(ModelClassWhichHasEntityAnnotation); 
+Getting an Entity : session.get(Entity.class, primarykey);
+
+
+
+--------------- Misc -----------------
+
+To add one objects properties as the propertie
+
+
+ 

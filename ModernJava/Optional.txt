@@ -1,0 +1,26 @@
+Methods to create Optional ->
+static Optional<T>	empty()
+static Optional<T>	of​(T value)
+static Optional<T>	ofNullable​(T value)
+
+Methods to get the value ->
+T	get()
+T	orElse​(T other)
+T	orElseGet​(Supplier<? extends T> supplier)
+T	orElseThrow()
+T	orElseThrow​(Supplier<Throwable> exceptionSupplier)
+
+Methods to get modified Optional ->
+Optional<T>	or​(Supplier supplier)
+Optional<T> filter​(Predicate predicate)
+Optional<U>	map​(Function mapper)
+Optional<U>	flatMap​(Function mapper)
+
+Methods to check if value present ->
+boolean	isPresent()
+boolean	isEmpty()
+void	ifPresent​(Consumer<T> action)
+void	ifPresentOrElse​(Consumer<T> action, Runnable emptyAction)
+
+Other Methods -> 
+Stream<T>	stream()

@@ -1,0 +1,1 @@
+ng generate componenet <comp_name>
