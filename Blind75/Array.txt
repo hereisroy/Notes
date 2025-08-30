@@ -2,6 +2,8 @@
 https://leetcode.com/problems/two-sum/description/
 -> Sol1 : Use HashMap to store indexs of numbers (Note: We can have duplicates but storing index of any of the occurances will do the job). Then loop through all numbers and check if diff=target-nums[i] is present in the HashMap & also that the index for diff is not i. If yes, return {i, map.get(diff)}
 	AVG O(n) Time, Worst O(n2), O(n) space
+	
+->> Using single loop : Loop through nums and check if diff is present in hashmap. If not add nums[i] in hashmap.
 
 For variations where we need not return indexes. For example, check if such pair exist, count number of pairs etc.
 
@@ -38,9 +40,13 @@ https://leetcode.com/problems/product-of-array-except-self/description/
 Time Complexity : (n)
 Space Complexity : O(n)
 
+->> Using output array (In Place) only O(1) : Build output array as preProduct array. Note that answer[i] does not contain nums[i] but rather it contains product of elements till nums[i-1]. Then traverse the nums in backwords, keep multiplying suffix product and keep building suffix product in variable.
+
+Space Complexity : O(1)
+
 ------------Maximum Sum Subarray-------------
 https://leetcode.com/problems/maximum-subarray/description/
--> Use sliding window. A sub array whose sum is negative, can not be a proper subset of the maximum subarray, Thus, slide window if sum is <0.
+-> A sub array whose sum is negative, can not be a proper subset of the maximum subarray. Thus, if sum of previous items is negetive, sum = current item. Else we can add new times. Then check if sum is greater than max.
 
 Time Complexity : (n)
 Space Complexity : O(1)
@@ -52,7 +58,14 @@ https://leetcode.com/problems/maximum-product-subarray/description/
 Time Complexity : (n)
 Space Complexity : O(1)
 
--> Sol2 : ans=max of prefixProduct(Inclusive) array and suffixProductArray(Inclusive)
+-> Sol2 : ans=max of prefixProduct(Inclusive) array and suffixProductArray(Inclusive).
+Explaination : When there are only positive numbers, the ans would be product of all items.
+When there are zeros, the problem is cut into multiple sub problems by the zero. the max of all the sub arrays is the ans.
+Again, when there are even number of negetive numbers, the answer would be the product of all items.
+But, when there are odd number of negetive numbers, we have to drop either starting items till the first negetive, or items in the right side starting from the last negetive.
+PrefixProduct has the maxProduct until the last negetive turns it negetive. So it has the max product we can get by dropping items from the right side starting from the last negetive.
+SuffixProduct has the max until the first negetive turns it negetive. It has the max product we can get by dropping leftmost items till the first negetive.
+So the max of both is the ans.
 
 Time Complexity : (n)
 Space Complexity : O(1)
