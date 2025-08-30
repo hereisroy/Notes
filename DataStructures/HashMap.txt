@@ -1,0 +1,21 @@
+The Map is an abstract data type (ADT) that stores data as key–value pairs, where each key is unique, and supports operations like insert (put), lookup (get), and delete (remove). java.util.Map<K,V> interface represents this ADT.
+
+java.util.HashMap is a concrete data structure implementation of the Map ADT, using a hash table under the hood (hashing + array + buckets + chaining - linked list/tree for collisions).
+
+Below are important terms associated with HashMap
+
+Key : The unique identifier for an element in HashMap. Can be any object implementing hashCode() and equals(). HashMap can only have 1 null key entry.
+Value : The data associated with a key. Values can be duplicate and null.
+java.util.Map.Entry<K,V> is a nested interface, a helper abstraction that represents a key–value pair inside the map.
+Entry : HashMap.Node<K,V> implements Map.Entry<K,V>. This is the Internal object representing a key–value pair in a bucket backed by a linked list (default until collisions exceed threshold). Every Node<K,V> has the hash value, key, value & pointer to another Node<K,V>. TreeNode<K,V> is a A subclass of Node<K,V> which is used when a bucket gets too many collisions (≥ 8 by default), so the bucket is converted from a linked list to a Red-Black Tree. Stores extra references needed for a tree: parent, left, right, prev, red/black color.
+Hash Function : In general DSA terms, a function that converts a key into an index. In Java this is done in multiple steps. The hashcode method of the key provides an integer. The hash method in HashMap class mixes the bits to reduce collisions. The index is calculated by calculating modulo using bit manipulation in the opration specific methods. 
+Collision : When two keys hash to the same bucket index. Chaining & Open Addressing are collision resolution methods.
+Open Addressing : All elements are stored directly in the hash table array (no external chaining). If a bucket is occupied, probe for another free slot. Linear Probing → try next slot, Quadratic Probing → try index + i² & Double Hashing → use another hash function to find next slot are popular methods.
+Chaining : If multiple keys land in the same bucket, they’re chained together. Each bucket stores a collection of entries (usually a linked list, sometimes a tree). Java HashMap uses chaining with LinkedList/RedBlackTree.
+Treeification : Since Java 8, if a bucket has more than 8 entries, and the table size is ≥ 64, the linked list is converted into a red–black tree. Improves worst-case lookup from O(n) → O(log n). Reverse (untreeify) happens when entries in a bucket drop below 6.
+Capacity : Number of buckets in the internal array. Always a power of 2 (16, 32, 64...). This is because if the capacity is power of two then modulo can be calculated fast using bit manipulation  [(n - 1) & hash], increasing performance.
+Load Factor : A measure of how full the HashMap is allowed to get before resizing. Default = 0.75. Example: If capacity = 16, resize occurs when 12 elements are stored. A new array with double the size is created and all elements are hashed again.
+Fail-Fast Iterator : If we do structural modification to a HashMap during iteration (inside for loop) then the HashIterator would throw ConcurrentModificationException in the next operation (nextNode/remove). Modification through the iterator is safe.
+
+From implementation perspective,
+A Java HashMap is a dynamically resizing array of buckets, where each bucket is implemented as either a linked list or a red-black tree of Node<K,V> objects, depending on collision frequency. 
